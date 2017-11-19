@@ -1,12 +1,18 @@
 import sys
+from skimage import io, img_as_uint, exposure
 
 from core.CTScanSimulator import CTScanSimulator
 
 from core.SinogramConverter import SinogramConverter
 
+from matplotlib import pyplot as plt
+
 
 def do_scan():
     sinogram = generate_sinogram()
+    exposure.rescale_intensity(sinogram, out_range='float')
+    sinogram = img_as_uint(sinogram)
+    io.imsave("output.jpg", sinogram)
     result = convert_sinogram(sinogram)
     print_result(result)
 
