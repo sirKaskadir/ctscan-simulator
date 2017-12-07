@@ -1,9 +1,9 @@
 {
   "outputSinogram": "output/sinogram.jpg",
   "outputCtScan": "output/ct_result.jpg",
-  "numberOfDetectors": 201,
-  "step": 2,
+  "numberOfDetectors": 451,
+  "step": 1,
   "initialAlpha": 0,
-  "phi": 250,
+  "phi": 275,
   "totalRotation": 360
 }
