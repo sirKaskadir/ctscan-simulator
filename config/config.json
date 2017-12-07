@@ -1,0 +1,9 @@
+{
+  "outputSinogram": "output/sinogram.jpg",
+  "outputCtScan": "output/ct_result.jpg",
+  "numberOfDetectors": 201,
+  "step": 2,
+  "initialAlpha": 0,
+  "phi": 250,
+  "totalRotation": 360
+}

@@ -5,6 +5,7 @@ import sys
 import numpy as np
 from PIL import Image
 
+from config.Config import Config
 from core.CTScanSimulator import CTScanSimulator
 from core.SinogramConverter import SinogramConverter
 
@@ -12,10 +13,10 @@ from core.SinogramConverter import SinogramConverter
 def do_scan():
     sinogram, radius, ct = generate_sinogram()
     img = Image.fromarray(np.uint8(sinogram * 255), 'L')
-    img.save("output_sinogram.jpg")
+    img.save(Config.config["outputSinogram"])
     result = convert_sinogram(sinogram, radius)
     img2 = Image.fromarray(np.uint8(result * 255), 'L')
-    img2.save("output_ct_result.jpg")
+    img2.save(Config.config["outputCtScan"])
 
 
 def generate_sinogram():

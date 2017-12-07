@@ -1,3 +1,4 @@
+from config.Config import Config
 from model.Detector import Detector
 from model.Emitter import Emitter
 
@@ -5,12 +6,16 @@ from model.Emitter import Emitter
 class CTScan:
 
     def __init__(self):
-        self._number_of_detectors = 201  # TODO add configuration for this value
+        self._number_of_detectors = Config.config["numberOfDetectors"]
         self._emitter = Emitter(0, 0)
         self._detectors = []
         for i in range(0, self._number_of_detectors - 1):
             detector = Detector(0, 0)
             self._detectors.append(detector)
+
+    def set_detectors_coordinates_for_emitter(self, alpha, phi, radius, center):
+        for i in range(0, self._number_of_detectors - 1):
+            self._detectors[i].calculate_position(alpha, phi, radius, center, i, self._number_of_detectors)
 
     @property
     def emitter(self):
