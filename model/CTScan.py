@@ -5,13 +5,12 @@ from model.Emitter import Emitter
 class CTScan:
 
     def __init__(self):
-        self._number_of_detectors = 200  # TODO add configuration for this value
+        self._number_of_detectors = 201  # TODO add configuration for this value
         self._emitter = Emitter(0, 0)
         self._detectors = []
         for i in range(0, self._number_of_detectors - 1):
             detector = Detector(0, 0)
             self._detectors.append(detector)
-
 
     @property
     def emitter(self):

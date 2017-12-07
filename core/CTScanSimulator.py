@@ -1,20 +1,19 @@
-from math import floor
 from math import ceil
 from math import cos
-from math import sin
-from math import radians
+from math import floor
 from math import pi
+from math import radians
+from math import sin
 
-from skimage import data
 import numpy as np
-
 from bresenham import bresenham
+from scipy import signal as sg
+from skimage import data
 
 from model.CTScan import CTScan
 
 
 class CTScanSimulator:
-
     def __init__(self, image_name):
         self._sinogram = None
         self._step = 2  # TODO conf
@@ -34,7 +33,10 @@ class CTScanSimulator:
             self._set_single_scan_coordinates(ct)
             self._do_single_scan(ct, i)
 
-        return self._sinogram
+        # kernel = np.array([[1, 1, 1], [1, 1, 0], [1, 0, 0]])
+        # self._sinogram = sg.convolve(self._sinogram, kernel, mode='constant')
+        # self._sinogram = sg.convolve(self._sinogram, [[1.], [-1.]])
+        return self._sinogram, self._radius, ct
 
     def _set_single_scan_coordinates(self, ct):
         self._set_emitter_position(ct.emitter)
@@ -47,8 +49,8 @@ class CTScanSimulator:
     def _set_detectors_coordinates_for_emitter(self, ct):
         for i in range(0, ct.number_of_detectors - 1):
             argument = (radians(self._alpha) + pi) - (self._fi / 2) + (i * (self._fi / (ct.number_of_detectors - 1)))
-            ct.detectors[i].x = int(self._radius * cos(radians(argument)) + self._center[0])
-            ct.detectors[i].y = int(self._radius * sin(radians(argument)) + self._center[1])
+            ct.detectors[i].x = int(self._radius * cos(argument)) + self._center[0]
+            ct.detectors[i].y = int(self._radius * sin(argument)) + self._center[1]
 
     def _do_single_scan(self, ct, i):
         for j in range(0, ct.number_of_detectors - 1):
