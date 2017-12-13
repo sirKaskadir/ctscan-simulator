@@ -2,8 +2,10 @@
   "outputSinogram": "output/sinogram.jpg",
   "outputCtScan": "output/ct_result.jpg",
   "numberOfDetectors": 451,
-  "step": 1,
+  "step": 2,
   "initialAlpha": 0,
-  "phi": 275,
-  "totalRotation": 360
+  "phi": 270,
+  "totalRotation": 360,
+  "enableSinogramConvolution": true,
+  "convolutionKernelSize": 5
 }
