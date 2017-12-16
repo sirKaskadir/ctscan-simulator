@@ -11,7 +11,9 @@ from core.SinogramConverter import SinogramConverter
 
 
 def do_scan():
-    sinogram, radius = generate_sinogram()
+    sinogram, raw_sinogram, radius = generate_sinogram()
+    img = Image.fromarray(np.uint8(raw_sinogram * 255), 'L')
+    img.save(Config.config["outputRawSinogram"])
     img = Image.fromarray(np.uint8(sinogram * 255), 'L')
     img.save(Config.config["outputSinogram"])
     result = convert_sinogram(sinogram, radius)

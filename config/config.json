@@ -1,5 +1,6 @@
 {
   "outputSinogram": "output/sinogram.jpg",
+  "outputRawSinogram": "output/sinogram_raw.jpg",
   "outputCtScan": "output/ct_result.jpg",
   "numberOfDetectors": 451,
   "step": 2,

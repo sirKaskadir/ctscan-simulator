@@ -14,6 +14,7 @@ from model.CTScan import CTScan
 class CTScanSimulator:
     def __init__(self, image_name):
         self._sinogram = None
+        self._raw_sinogram = None
         self._step = Config.config["step"]
         self._input_image = data.imread(image_name, as_grey=True)
         self._image_matrix = np.matrix(self._input_image)
@@ -28,7 +29,7 @@ class CTScanSimulator:
         self._sinogram = np.empty(shape=(steps_number, ct.number_of_detectors))
         self._generate_sinogram(ct, steps_number)
         self._convolve_sinogram()
-        return self._sinogram, self._radius
+        return self._sinogram, self._raw_sinogram, self._radius
 
     def _generate_sinogram(self, ct, steps_number):
         for i in range(0, steps_number - 1):
@@ -37,6 +38,7 @@ class CTScanSimulator:
             self._do_single_scan(ct, i)
 
     def _convolve_sinogram(self):
+        self._raw_sinogram = self._sinogram
         if Config.config["enableSinogramConvolution"]:
             kernel_size = Config.config["convolutionKernelSize"]
             kernel = np.zeros(shape=(kernel_size, kernel_size))
